@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+input {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    outline: none;
+    padding: 4px;
+}
+label {
+    color: indigo;
+    font-weight: bold;
+}
+
+input:focus {
+    border: 2px solid dodgerblue;
+}

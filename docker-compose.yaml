@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+    command: gunicorn backend.wsgi --bind 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - frontend_build:/frontend/build
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - frontend_build:/var/www/frontend
+    depends_on:
+      - backend
+      - frontend
+
+volumes:
+  frontend_build:
